@@ -43,7 +43,6 @@ int main() {
         while(left <= right) {
             long long mid = ((left + right) >> 1);
             long long cnt = count(mid);
-            // cout << mid << ' ' << cnt << '\n';
 
             if(cnt >= N) {
                 prev_cnt = count(mid - 1);
@@ -56,8 +55,6 @@ int main() {
                 left = mid + 1;
             }
         }
-
-        // cout << prev_cnt << '\n';
 
         for(int i=0; i < M; i++) {
             if(t % rides[i] == 0) {

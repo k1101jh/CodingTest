@@ -4,14 +4,14 @@
 using namespace std;
 
 int N;
-vector<vector<int>> tree;
+vector<vector<int>> parents;
 vector<vector<int>> dp;
 vector<bool> visited;
 
 void calc(int cur) {
     dp[cur][0] = 1;
 
-    for(auto& child : tree[cur]) {
+    for(auto& child : parents[cur]) {
         // cur이 얼리 아답터인 경우
         // 자식이 얼리 아답터일 필요 없음
         dp[cur][0] += min(dp[child][0], dp[child][1]);
@@ -24,7 +24,7 @@ void calc(int cur) {
 
 void recursive_calc(int cur) {
     visited[cur] = true;
-    for(auto& child : tree[cur]) {
+    for(auto& child : parents[cur]) {
         if(visited[child] == false) {
             recursive_calc(child);
         }
@@ -41,17 +41,17 @@ int main() {
 
     int u, v, root;
     dp = vector<vector<int>>(N + 1, vector<int>(2, 0));
-    tree = vector<vector<int>>(N + 1, vector<int>());
+    parents = vector<vector<int>>(N + 1, vector<int>());
     visited = vector<bool>(N + 1, false);
 
     cin >> u >> v;
-    tree[u].push_back(v);
+    parents[u].push_back(v);
     root = u;
 
     for(int i=1; i < N - 1; i++) {
         cin >> u >> v;
-        tree[u].push_back(v);
-        tree[v].push_back(u);
+        parents[u].push_back(v);
+        parents[v].push_back(u);
     }
 
     recursive_calc(root);

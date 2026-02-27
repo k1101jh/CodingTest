@@ -3,7 +3,7 @@
 #include <queue>
 using namespace std;
 
-vector<vector<int>> tree;
+vector<vector<int>> parents;
 vector<double> water;
 
 int main() {
@@ -14,12 +14,12 @@ int main() {
     int N, W, U, V;
     cin >> N >> W;
 
-    tree = vector<vector<int>>(N + 1, vector<int>());
+    parents = vector<vector<int>>(N + 1, vector<int>());
 
     for(int i=0; i < N - 1; i++) {
         cin >> U >> V;
-        tree[U].push_back(V);
-        tree[V].push_back(U);
+        parents[U].push_back(V);
+        parents[V].push_back(U);
     }
 
     // 리프 노드의 개수 구하기
@@ -27,7 +27,7 @@ int main() {
 
     // N이 2 이상이므로 루트 노드는 리프 노드가 될 수 없음
     for(int i=2; i <= N; i++) {
-        if(tree[i].size() == 1) {
+        if(parents[i].size() == 1) {
             num_leafs++;
         }
     }

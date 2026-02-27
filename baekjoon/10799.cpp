@@ -17,7 +17,6 @@ int main () {
     int num_sticks = 0;
     int cnt = 0;
 
-
     for(int i=0; i < inp.size(); i++) {
         if(inp[i] == '(') {
             s.push(i);

@@ -53,8 +53,6 @@ int main() {
             }
         }
 
-        // cout << right << ' ' << min_num << ' ' << max_num << '\n';
-
         ans = max(ans, right - left + 1);
     }
 

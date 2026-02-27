@@ -3,7 +3,7 @@
 using namespace std;
 
 int N, M;
-vector<vector<pair<int,int>>> tree;
+vector<vector<pair<int,int>>> parents;
 
 int Prim() {
     vector<bool> added(N + 1, false);
@@ -30,7 +30,7 @@ int Prim() {
         added[cur] = true;
         return_val += min_cost;
 
-        for(auto& next_node: tree[cur]) {
+        for(auto& next_node: parents[cur]) {
             if(added[next_node.first]) continue;
 
             if(min_dists[next_node.first] > next_node.second) {
@@ -48,14 +48,14 @@ int main() {
 
     cin >> N >> M;
 
-    tree = vector<vector<pair<int, int>>>(N + 1, vector<pair<int, int>>());
+    parents = vector<vector<pair<int, int>>>(N + 1, vector<pair<int, int>>());
 
     int a, b, c;
     for(int i=0; i < M; i++) {
         cin >> a >> b >> c;
 
-        tree[a].push_back({b, c});
-        tree[b].push_back({a, c});
+        parents[a].push_back({b, c});
+        parents[b].push_back({a, c});
     }
 
     cout << Prim() << '\n';
