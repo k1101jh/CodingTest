@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int map[3][3] = {0};
+int board[3][3] = {0};
 int cur_player;
 int dy[] = {-1, -1, 0, 1, 1, 1, 0, -1};
 int dx[] = {0, 1, 1, 1, 0, -1, -1, -1};
@@ -22,7 +22,7 @@ int count_stone(int y, int x, int d) {
     int new_y = y + dy[d];
     int new_x = x + dx[d];
     int num_stone = 1;
-    while(is_closed_point(new_y, new_x) && map[new_y][new_x] == cur_player) {
+    while(is_closed_point(new_y, new_x) && board[new_y][new_x] == cur_player) {
         num_stone++;
         new_y += dy[d];
         new_x += dx[d];
@@ -47,7 +47,7 @@ bool check_game_over(int y, int x) {
 }
 
 int apply_move(int y, int x) {
-    map[y][x] = cur_player;
+    board[y][x] = cur_player;
     if(check_game_over(y, x)) {
         return cur_player;
     }

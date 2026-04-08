@@ -4,7 +4,7 @@
 using namespace std;
 
 int N;
-vector<vector<int>> map;
+vector<vector<int>> board;
 vector<vector<bool>> visited;
 
 int dy[4] = {-1, 0, 1, 0};
@@ -53,11 +53,11 @@ int main() {
 
     cin >> N;
 
-    map = vector<vector<int>>(N, vector<int>(N, 0));
+    board = vector<vector<int>>(N, vector<int>(N, 0));
     visited = vector<vector<bool>>(N, vector<bool>(N, false));
     for(int i=0; i < N; i++) {
         for(int j=0; j < N; j++) {
-            cin >> map[i][j];
+            cin >> board[i][j];
         }
     }
 
@@ -65,7 +65,7 @@ int main() {
     for(int water_height=1; water_height < 100; water_height++) {
         for(int i=0; i < N; i++) {
             for(int j=0; j < N; j++) {
-                if(map[i][j] <= water_height) {
+                if(board[i][j] <= water_height) {
                     visited[i][j] = true;
                 } else {
                     visited[i][j] = false;

@@ -2,7 +2,7 @@
 using namespace std;
 
 int N;
-char map[101][101];
+char board[101][101];
 int dy[] = {-1, -1, -1, 0, 1, 1, 1, 0};
 int dx[] = {-1, 0, 1, 1, 1, 0, -1, -1};
 
@@ -23,7 +23,7 @@ int main() {
 
     for(int i=0; i < N; i++) {
         for(int j=0; j < N; j++) {
-            cin >> map[i][j];
+            cin >> board[i][j];
         }
     }
 
@@ -41,7 +41,7 @@ int main() {
                 for(int k=0; k < 8; k++) {
                     int next_y = i + dy[k];
                     int next_x = j + dx[k];
-                    if(map[next_y][next_x] == '0' && !is_empty) {
+                    if(board[next_y][next_x] == '0' && !is_empty) {
                         is_empty = true;
                         ans--;
                     }
@@ -50,8 +50,8 @@ int main() {
                     for(int k=0; k < 8; k++) {
                         int next_y = i + dy[k];
                         int next_x = j + dx[k];
-                        if(map[next_y][next_x] >= '1' && map[next_y][next_x] <= '9') {
-                            map[next_y][next_x]--;
+                        if(board[next_y][next_x] >= '1' && board[next_y][next_x] <= '9') {
+                            board[next_y][next_x]--;
                         }
                     }
                 }

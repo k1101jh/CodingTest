@@ -5,7 +5,7 @@
 using namespace std;
 
 int N, M;
-int map[1000][1000];
+int board[1000][1000];
 int ans[1000][1000] = {0};
 bool visited[1000][1000] = {0};
 int sizes[1000000] = {0};
@@ -56,7 +56,7 @@ void dfs(int y, int x) {
             int new_y = here.first + d_y[i];
             int new_x = here.second + d_x[i];
             if(new_y >= 0 && new_y < N && new_x >= 0 && new_x < M) {
-                if(map[new_y][new_x] == 0 && visited[new_y][new_x] == false) {
+                if(board[new_y][new_x] == 0 && visited[new_y][new_x] == false) {
                     s.push({new_y, new_x});
                     my_union(start_idx, new_y * M + new_x);
                 }
@@ -77,14 +77,14 @@ int main() {
     for(int i=0; i < N; i++) {
         for(int j=0; j < M; j++) {
             cin >> inp;
-            map[i][j] = inp - '0';
+            board[i][j] = inp - '0';
             roots[M * i + j] = M * i + j;
         }
     }
 
     for(int i=0; i < N; i++) {
         for(int j=0; j < M; j++) {
-            if(map[i][j] == 0 && visited[i][j] == false) {
+            if(board[i][j] == 0 && visited[i][j] == false) {
                 dfs(i, j);
             }
         }
@@ -92,13 +92,13 @@ int main() {
 
     for(int i=0; i < N; i++) {
         for(int j=0; j < M; j++) {
-            if(map[i][j] == 1) {
+            if(board[i][j] == 1) {
                 vector<int> closed_groups;
                 for(int k=0; k < 4; k++) {
                     int new_y = i + d_y[k];
                     int new_x = j + d_x[k];
                     if(new_y >= 0 && new_y < N && new_x >= 0 && new_x < M) {
-                        if(map[new_y][new_x] == 0) {
+                        if(board[new_y][new_x] == 0) {
                             closed_groups.push_back(find_root(new_y * M + new_x));
                         }
                     }

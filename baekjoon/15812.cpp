@@ -17,12 +17,12 @@ int main() {
     cout.tie(NULL);
 
     cin >> N >> M;
-    vector<string> map = vector<string>(N, "");
+    vector<string> board = vector<string>(N, "");
 
     for(int i=0; i < N; i++) {
-        cin >> map[i];
+        cin >> board[i];
         for(int j=0; j < M; j++) {
-            if(map[i][j] == '1') {
+            if(board[i][j] == '1') {
                 houses.push_back({i, j});
             } else {
                 empty_spaces.push_back({i, j});

@@ -21,7 +21,7 @@ class Shark {
         }
 };
 
-Shark*** map = {};
+Shark*** board = {};
 Shark*** next_map = {};
 int next_d[] = {0, 2, 1, 4, 3};
 int d_r[] = {0, -1, 1, 0, 0};
@@ -30,11 +30,11 @@ int ans = 0;
 
 void catch_shark(int col) {
     for(int r=0; r < R; r++) {
-        if(map[r][col] != nullptr) {
-            Shark* cached_shark = map[r][col];
+        if(board[r][col] != nullptr) {
+            Shark* cached_shark = board[r][col];
             ans += cached_shark->z;
             delete cached_shark;
-            map[r][col] = nullptr;
+            board[r][col] = nullptr;
             break;
         }
     }
@@ -57,8 +57,8 @@ void simulation() {
         // 상어를 찾고 이동시키기
         for(int r=0; r < R; r++) {
             for(int c=0; c < C; c++) {
-                if(map[r][c] != nullptr) {
-                    Shark* shark = map[r][c];
+                if(board[r][c] != nullptr) {
+                    Shark* shark = board[r][c];
 
                     switch(shark->d) {
                         case 1:
@@ -122,10 +122,10 @@ void simulation() {
             }
         }
         for(int i=0; i < R; i++) {
-            delete[] map[i];
+            delete[] board[i];
         }
-        delete[] map;
-        map = next_map;
+        delete[] board;
+        board = next_map;
     }
 }
 
@@ -136,11 +136,11 @@ int main() {
 
     cin >> R >> C >> M;
 
-    map = new Shark** [R];
+    board = new Shark** [R];
     for(int i=0; i < R; i++) {
-        map[i] = new Shark* [C];
+        board[i] = new Shark* [C];
         for(int j=0; j < C; j++) {
-            map[i][j] = nullptr;
+            board[i][j] = nullptr;
         }
     }
 
@@ -162,18 +162,18 @@ int main() {
                 s %= (2 * (C - 1));
                 break;
         }
-        map[r][c] = new Shark(r, c, s, d, z);
+        board[r][c] = new Shark(r, c, s, d, z);
     }
 
     simulation();
 
     for(int i=0; i < R; i++) {
         for(int j=0; j < C; j++) {
-            delete map[i][j];
+            delete board[i][j];
         }
-        delete[] map[i];
+        delete[] board[i];
     }
-    delete[] map;
+    delete[] board;
 
     cout << ans << '\n';
 }

@@ -4,7 +4,7 @@ using namespace std;
 
 int N;
 
-vector<vector<int>> map;
+vector<vector<int>> board;
 
 long long Prim() {
     vector<bool> added(N, false);
@@ -34,7 +34,7 @@ long long Prim() {
             if(next == cur) continue;
             if(added[next]) continue;
 
-            min_costs[next] = min(min_costs[next], map[cur][next]);
+            min_costs[next] = min(min_costs[next], board[cur][next]);
         }
     }
 
@@ -47,11 +47,11 @@ int main() {
     cout.tie(NULL);
 
     cin >> N;
-    map = vector<vector<int>>(N, vector<int>(N, 0));
+    board = vector<vector<int>>(N, vector<int>(N, 0));
 
     for(int i=0; i < N; i++) {
         for(int j=0; j < N; j++) {
-            cin >> map[i][j];
+            cin >> board[i][j];
         }
     }
 

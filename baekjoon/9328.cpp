@@ -7,7 +7,7 @@ int dx[] = {0, -1, 0, 1};
 
 void bfs(int h, int w, int y, int x,
          int& num_doc, int& key_bit, vector<pair<int, int>>& locked_doors,
-         char map[][100], bool visited[][100]) {
+         char board[][100], bool visited[][100]) {
     queue<pair<int, int>> q;
     q.push({y, x});
     visited[y][x] = true;
@@ -16,7 +16,7 @@ void bfs(int h, int w, int y, int x,
         pair<int, int> here = q.front();
         q.pop();
 
-        char& here_char = map[here.first][here.second];
+        char& here_char = board[here.first][here.second];
         if(here_char == '$') {
             num_doc++;
         } else if(here_char >= 'a' && here_char <= 'z') {
@@ -35,7 +35,7 @@ void bfs(int h, int w, int y, int x,
             if(new_y < 0 || new_y >= h || new_x < 0 || new_x >= w) {
                 continue;
             } else {
-                if(map[new_y][new_x] != '*') {
+                if(board[new_y][new_x] != '*') {
                     if(visited[new_y][new_x] == false) {
                         visited[new_y][new_x] = true;
                         q.push({new_y, new_x});
@@ -46,7 +46,7 @@ void bfs(int h, int w, int y, int x,
     }
 }
 
-int get_ans(int h, int w, string start_key, char map[][100]) {
+int get_ans(int h, int w, string start_key, char board[][100]) {
     int num_doc = 0;
     int key_bit = 0;
     bool visited[100][100] = {false};
@@ -62,18 +62,18 @@ int get_ans(int h, int w, string start_key, char map[][100]) {
 
     // 시작 위치
     for(int i=0; i < h; i++) {
-        if(map[i][0] != '*') {
+        if(board[i][0] != '*') {
             start_points.push_back({i, 0});
         }
-        if(map[i][w-1] != '*') {
+        if(board[i][w-1] != '*') {
             start_points.push_back({i, w - 1});
         }
     }
     for(int j=0; j < w; j++) {
-        if(map[0][j] != '*') {
+        if(board[0][j] != '*') {
             start_points.push_back({0, j});
         }
-        if(map[h-1][j] != '*') {
+        if(board[h-1][j] != '*') {
             start_points.push_back({h - 1, j});
         }
     }
@@ -85,7 +85,7 @@ int get_ans(int h, int w, string start_key, char map[][100]) {
     for(int i=0; i < start_points.size(); i++) {
         if(!visited[start_points[i].first][start_points[i].second]) {
             bfs(h, w, start_points[i].first, start_points[i].second,
-                num_doc, key_bit, locked_doors, map, visited);
+                num_doc, key_bit, locked_doors, board, visited);
         }
     }
     
@@ -97,11 +97,11 @@ int get_ans(int h, int w, string start_key, char map[][100]) {
         for(int i=0; i < locked_doors.size(); i++) {
             int y = locked_doors[i].first;
             int x = locked_doors[i].second;
-            if(key_bit & (1 << (map[y][x] - 'A'))) {
+            if(key_bit & (1 << (board[y][x] - 'A'))) {
                 locked_doors.erase(locked_doors.begin() + i);
                 i--;
                 bfs(h, w, y, x,
-                    num_doc, key_bit, locked_doors, map, visited);
+                    num_doc, key_bit, locked_doors, board, visited);
             }
         }
     }
@@ -119,16 +119,16 @@ int main() {
     for(int t=0; t < T; t++) {
         int w, h;
         string start_key;
-        char map[100][100];
+        char board[100][100];
 
         cin >> w >> h;
         for(int i=0; i < w; i++) {
             for(int j=0; j < h; j++) {
-                cin >> map[i][j];
+                cin >> board[i][j];
             }
         }
 
         cin >> start_key;
-        cout << get_ans(w, h, start_key, map) << '\n';
+        cout << get_ans(w, h, start_key, board) << '\n';
     }
 }

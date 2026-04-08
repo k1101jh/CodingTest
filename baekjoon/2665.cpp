@@ -7,7 +7,7 @@ int n;
 
 int dy[4] = {-1, 0, 1, 0};
 int dx[4] = {0, -1, 0, 1};
-vector<string> map;
+vector<string> board;
 vector<vector<int>> costs;
 
 int Dijkstra(pair<int, int> start) {
@@ -37,7 +37,7 @@ int Dijkstra(pair<int, int> start) {
             }
 
             int next_cost = cost;
-            if(map[next_y][next_x] == '0') {
+            if(board[next_y][next_x] == '0') {
                 next_cost += 1;
             }
 
@@ -57,10 +57,10 @@ int main() {
     cout.tie(NULL);
 
     cin >> n;
-    map = vector<string>(n, "");
+    board = vector<string>(n, "");
 
     for(int i=0; i < n; i++) {
-        cin >> map[i];
+        cin >> board[i];
     }
     
     cout << Dijkstra({0, 0}) << '\n';

@@ -13,14 +13,14 @@ int main() {
     int N, num_to_find;
     cin >> N >> num_to_find;
 
-    vector<vector<int>> map = vector<vector<int>>(N, vector<int>(N, 0));
+    vector<vector<int>> board = vector<vector<int>>(N, vector<int>(N, 0));
 
     int y = 0, x = 0, d = 0, num = N * N, cur_len = N - 1, remain_num = 3;
     int answer_y = 0, answer_x = 0;
     int dest_y = static_cast<int>(N / 2);
     int dest_x = static_cast<int>(N / 2);
 
-    map[y][x] = num--;
+    board[y][x] = num--;
 
     while(cur_len != 0) {
         for(int i=0; i < cur_len; i++) {
@@ -30,7 +30,7 @@ int main() {
                 answer_y = y;
                 answer_x = x;
             }
-            map[y][x] = num--;
+            board[y][x] = num--;
         }
 
         d = (d + 1) % 4;
@@ -44,7 +44,7 @@ int main() {
 
     for(int i=0; i < N; i++) {
         for(int j=0; j < N; j++) {
-            cout << map[i][j] << ' ';
+            cout << board[i][j] << ' ';
         }
         cout << '\n';
     }
