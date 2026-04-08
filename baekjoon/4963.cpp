@@ -11,7 +11,7 @@ bool is_available(const int& h, const int& w, const pair<int, int>& pos) {
     return (pos.first >= 0 && pos.second >= 0 && pos.first < h && pos.second < w);
 }
 
-void bfs(const int& h, const int& w, vector<vector<int>>& map, vector<vector<bool>>& visited, const int& start_y, const int& start_x) {
+void bfs(const int& h, const int& w, vector<vector<int>>& board, vector<vector<bool>>& visited, const int& start_y, const int& start_x) {
     const static pair<int, int> directions[8] = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
     queue<pair<int, int>> q;
     q.push({start_y, start_x});
@@ -23,7 +23,7 @@ void bfs(const int& h, const int& w, vector<vector<int>>& map, vector<vector<boo
         for(int i=0; i < 8; i++) {
             pair<int, int> next = cur + directions[i];
             if(is_available(h, w, next)) {
-                if(map[next.first][next.second] != 0 && !visited[next.first][next.second]) {
+                if(board[next.first][next.second] != 0 && !visited[next.first][next.second]) {
                     q.push(next);
                     visited[next.first][next.second] = true;
                 }
@@ -32,13 +32,13 @@ void bfs(const int& h, const int& w, vector<vector<int>>& map, vector<vector<boo
     }
 }
 
-int bfs_all(const int& h, const int& w, vector<vector<int>>& map, vector<vector<bool>>& visited) {
+int bfs_all(const int& h, const int& w, vector<vector<int>>& board, vector<vector<bool>>& visited) {
     int num_land = 0;
     for(int i=0; i < h; i++) {
         for(int j=0; j < w; j++) {
-            if(map[i][j] != 0 && !visited[i][j]) {
+            if(board[i][j] != 0 && !visited[i][j]) {
                 visited[i][j] = true;
-                bfs(h, w, map, visited, i, j);
+                bfs(h, w, board, visited, i, j);
                 num_land++;
             }
         }
@@ -57,15 +57,15 @@ int main() {
 
     while(w != 0 && h != 0) {
         vector<vector<bool>> visited(h, vector<bool>(w, false));
-        vector<vector<int>> map(h, vector<int>(w, 0));
+        vector<vector<int>> board(h, vector<int>(w, 0));
 
         for(int i=0; i < h; i++) {
             for(int j=0; j < w; j++) {
-                cin >> map[i][j];
+                cin >> board[i][j];
             }
         }
 
-        cout << bfs_all(h, w, map, visited) << '\n';
+        cout << bfs_all(h, w, board, visited) << '\n';
 
         cin >> w >> h;
     }

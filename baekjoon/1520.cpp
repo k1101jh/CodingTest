@@ -4,7 +4,7 @@
 using namespace std;
 
 int M, N;
-vector<vector<int>> map;
+vector<vector<int>> board;
 vector<vector<bool>> visited;
 vector<vector<int>> dp;
 
@@ -27,7 +27,7 @@ int dfs(pair<int, int> cur_pos) {
         // 범위 검사
         if(next_pos.first >= 0 && next_pos.first < M && next_pos.second >= 0 && next_pos.second < N) {
             // 저장한 해당 루트로 가는 가지수 확인
-            if(map[next_pos.first][next_pos.second] < map[cur_pos.first][cur_pos.second]) {
+            if(board[next_pos.first][next_pos.second] < board[cur_pos.first][cur_pos.second]) {
                 if(dp[next_pos.first][next_pos.second] != -1) {
                     num_routes += dp[next_pos.first][next_pos.second];
                 } else {
@@ -51,13 +51,13 @@ int main() {
 
     cin >> M >> N;
 
-    map = vector<vector<int>>(M, vector<int>(N, 0));
+    board = vector<vector<int>>(M, vector<int>(N, 0));
     visited = vector<vector<bool>>(M, vector<bool>(N, false));
     dp = vector<vector<int>>(M, vector<int>(N, -1));
 
     for(int i=0; i < M; i++) {
         for(int j=0; j < N; j++) {
-            cin >> map[i][j];
+            cin >> board[i][j];
         }
     }
 

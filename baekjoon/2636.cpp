@@ -4,7 +4,7 @@
 using namespace std;
 
 int H, W;
-int map[100][100];
+int board[100][100];
 bool visited[100][100] = {0};
 int dy[] = {-1, 0, 1, 0};
 int dx[] = {0, 1, 0, -1};
@@ -14,7 +14,7 @@ void print_map() {
     cout << '\n';
     for(int i=0; i < H; i++) {
         for(int j=0; j < W; j++) {
-            cout << map[i][j] << ' ';
+            cout << board[i][j] << ' ';
         }
         cout << '\n';
     }
@@ -45,7 +45,7 @@ void bfs(int start_y, int start_x, vector<pair<int, int>>* v) {
             if(is_valid_point(next_y, next_x)) {
                 if(!visited[next_y][next_x]) {
                     visited[next_y][next_x] = true;
-                    if(map[next_y][next_x] == 1) {
+                    if(board[next_y][next_x] == 1) {
                         v->push_back({next_y, next_x});
                     } else {
                         q.push({next_y, next_x});
@@ -67,8 +67,8 @@ int main() {
 
     for(int i=0; i < H; i++) {
         for(int j=0; j < W; j++) {
-            cin >> map[i][j];
-            if(map[i][j] == 1) {
+            cin >> board[i][j];
+            if(board[i][j] == 1) {
                 cheese_size++;
             }
         }
@@ -79,7 +79,7 @@ int main() {
         vector<pair<int, int>>* v = new vector<pair<int, int>>;
         bfs(0, 0, v);
         for(int i=0; i < v->size(); i++) {
-            map[(*v)[i].first][(*v)[i].second] = 0;
+            board[(*v)[i].first][(*v)[i].second] = 0;
         }
         cheese_size -= v->size();
         t++;
@@ -99,7 +99,7 @@ int main() {
             delete v;
             v = next_v;
             for(int i=0; i < v->size(); i++) {
-                map[(*v)[i].first][(*v)[i].second] = 0;
+                board[(*v)[i].first][(*v)[i].second] = 0;
             }
 #ifndef ONLINE_JUDGE
             cout << cheese_size << '\n';

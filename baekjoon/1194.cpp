@@ -4,7 +4,7 @@
 using namespace std;
 
 int N, M;
-char map[50][50];
+char board[50][50];
 bool visited[(1 << 6)][50][50] = {0};
 int sy, sx;
 int dy[] = {-1, 0, 1, 0};
@@ -28,7 +28,7 @@ void bfs(int y, int x) {
         int here_keys = get<2>(q.front());
         q.pop();
 
-        char& here_char = map[here.first][here.second];
+        char& here_char = board[here.first][here.second];
         if(here_char == '#') {
             continue;
         } else if(here_char == '1') {
@@ -63,8 +63,8 @@ int main() {
     cin >> N >> M;
     for(int i=0; i < N; i++) {
         for(int j=0; j < M; j++) {
-            cin >> map[i][j];
-            if(map[i][j] == '0') {
+            cin >> board[i][j];
+            if(board[i][j] == '0') {
                 sy = i;
                 sx = j;
             }

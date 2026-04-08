@@ -46,11 +46,11 @@ int main() {
 
     cin >> N >> L;
 
-    vector<vector<int>> map(N, vector<int>(N, 0));
+    vector<vector<int>> board(N, vector<int>(N, 0));
 
     for(int i=0; i < N; i++) {
         for(int j=0; j < N; j++) {
-            cin >> map[i][j];
+            cin >> board[i][j];
         }
     }
 
@@ -58,14 +58,14 @@ int main() {
 
     // 가로 행 검사
     for(int i=0; i < N; i++) {
-        ans += CheckLine(map[i]) ? 1 : 0;
+        ans += CheckLine(board[i]) ? 1 : 0;
     }
 
     // 세로 행 검사
     for(int i=0; i < N; i++) {
         vector<int> line(N, 0);
         for(int j=0; j < N; j++) {
-            line[j] = map[j][i];
+            line[j] = board[j][i];
         }
         ans += CheckLine(line) ? 1 : 0;
     }

@@ -7,7 +7,7 @@ int n;
 
 int dy[4] = {-1, 0, 1, 0};
 int dx[4] = {0, -1, 0, 1};
-vector<string> map;
+vector<string> board;
 vector<vector<int>> costs;
 
 int BFS(pair<int, int> start) {
@@ -28,7 +28,7 @@ int BFS(pair<int, int> start) {
             }
 
             int add_cost = 0;
-            if(map[next_y][next_x] == '0') {
+            if(board[next_y][next_x] == '0') {
                 add_cost = 1;
             }
             int next_cost = cost + add_cost;
@@ -51,10 +51,10 @@ int main() {
     cout.tie(NULL);
 
     cin >> n;
-    map = vector<string>(n, "");
+    board = vector<string>(n, "");
 
     for(int i=0; i < n; i++) {
-        cin >> map[i];
+        cin >> board[i];
     }
     
     cout << BFS({0, 0}) << '\n';

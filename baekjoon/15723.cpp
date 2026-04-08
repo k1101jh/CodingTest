@@ -6,12 +6,12 @@ int alphabet_to_index(char alphabet) {
     return alphabet - 'a';
 }
 
-void floyd_washall(bool map[][26]) {
+void floyd_washall(bool board[][26]) {
     for(int k=0; k < 26; k++) {
         for(int i=0; i < 26; i++) {
             for(int j=0; j < 26; j++) {
-                if(map[i][k] && map[k][j]) {
-                    map[i][j] = true;
+                if(board[i][k] && board[k][j]) {
+                    board[i][j] = true;
                 }
             }
         }
@@ -26,7 +26,7 @@ int main() {
     int n, m;
     char a, b;
     string temp;
-    bool map[26][26] = {0};
+    bool board[26][26] = {0};
 
     cin >> n;
     for(int i=0; i < n; i++) {
@@ -35,10 +35,10 @@ int main() {
         int a_idx = alphabet_to_index(a);
         int b_idx = alphabet_to_index(b);
 
-        map[a_idx][b_idx] = true;
+        board[a_idx][b_idx] = true;
     }
 
-    floyd_washall(map);
+    floyd_washall(board);
 
     cin >> m;
     for(int i=0; i < m; i++) {
@@ -47,7 +47,7 @@ int main() {
         int a_idx = alphabet_to_index(a);
         int b_idx = alphabet_to_index(b);
 
-        if(map[a_idx][b_idx]) {
+        if(board[a_idx][b_idx]) {
             cout << "T" << '\n';
         } else {
             cout << "F" << '\n';

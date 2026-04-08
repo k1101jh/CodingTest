@@ -13,16 +13,16 @@ int main() {
     int N, M;
     cin >> N >> M;
 
-    vector<string> map(N, "");
+    vector<string> board(N, "");
 
     for(int i=0; i < N; i++) {
-        cin >> map[i];
+        cin >> board[i];
     }
 
     int ans = 0;
 
     for(int i=1; i < M; i++) {
-        if(map[0][i - 1] != map[0][i]) {
+        if(board[0][i - 1] != board[0][i]) {
             ans++;
         }
     }
@@ -30,25 +30,25 @@ int main() {
     for(int i=1; i < N; i++) {
         for(int j=0; j < M; j++) {
             // 가로 검사
-            if(j != 0 && map[i][j - 1] != map[i][j]) {
+            if(j != 0 && board[i][j - 1] != board[i][j]) {
                 ans++;
             }
 
             // 세로 검사
             if(i % 2 == 0) {
-                if(j != 0 && map[i - 1][j - 1] != map[i][j]) {
+                if(j != 0 && board[i - 1][j - 1] != board[i][j]) {
                     ans++;
                 }
                 
-                if(map[i - 1][j] != map[i][j]) {
+                if(board[i - 1][j] != board[i][j]) {
                     ans++;
                 }
             } else {
-                if(map[i - 1][j] != map[i][j]) {
+                if(board[i - 1][j] != board[i][j]) {
                     ans++;
                 }
 
-                if(j < M - 1 && map[i - 1][j + 1] != map[i][j]) {
+                if(j < M - 1 && board[i - 1][j + 1] != board[i][j]) {
                     ans++;
                 }
             }

@@ -14,7 +14,7 @@ int cur_gen = 0;
 
 const int BOARD_SIZE = 101;
 
-vector<vector<bool>> map(BOARD_SIZE, vector<bool>(BOARD_SIZE, false));
+vector<vector<bool>> board(BOARD_SIZE, vector<bool>(BOARD_SIZE, false));
 vector<int> dragon_c;
 
 void Draw(int x, int y, int dir, int g) {
@@ -22,11 +22,11 @@ void Draw(int x, int y, int dir, int g) {
     int cur_x = x;
     int cur_y = y;
 
-    map[y][x] = true;
+    board[y][x] = true;
 
     for(int i=0; i <= limit; i++) {
         int cur_dir = (dragon_c[i] + dir) % 4;
-        map[cur_y][cur_x] = true;
+        board[cur_y][cur_x] = true;
         cur_x += dx[cur_dir];
         cur_y += dy[cur_dir];
     }
@@ -65,7 +65,7 @@ int main() {
         for(int j=0; j < BOARD_SIZE - 1; j++) {
             int k = 0;
             for(k=0; k < 4; k++) {
-                if(!map[i + grid_dy[k]][j + grid_dx[k]]) {
+                if(!board[i + grid_dy[k]][j + grid_dx[k]]) {
                     break;
                 }
             }

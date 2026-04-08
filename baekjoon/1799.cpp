@@ -3,7 +3,7 @@ using namespace std;
 
 int N;
 int d_range;
-int map[10][10] = {0};
+int board[10][10] = {0};
 
 
 int recursive(int r_d_idx, int r_d, int l_d, int n) {
@@ -16,7 +16,7 @@ int recursive(int r_d_idx, int r_d, int l_d, int n) {
     for(int l_d_idx=max(0, abs(N - 1 - r_d_idx)); l_d_idx < idx_range; l_d_idx += 2) {
         int i = (r_d_idx + l_d_idx - (N - 1)) / 2;
         int j = l_d_idx - i;
-        if(map[i][j] == 1) {
+        if(board[i][j] == 1) {
             int r_d_bit = (1 << r_d_idx);
             int l_d_bit = (1 << l_d_idx);
             if((!(r_d_bit & r_d)) && (!(l_d_bit & l_d))) {
@@ -39,7 +39,7 @@ int main() {
     d_range = N + N - 1;
     for(int i=0; i < N; i++) {
         for(int j=0; j < N; j++) {
-            cin >> map[i][j];
+            cin >> board[i][j];
         }
     }
 

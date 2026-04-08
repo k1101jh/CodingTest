@@ -2,7 +2,7 @@
 using namespace std;
 
 int N, M;
-int map[1000][1000];
+int board[1000][1000];
 int dp[1000][1000];
 
 int recursive(int y, int x) {
@@ -11,7 +11,7 @@ int recursive(int y, int x) {
     } else {
         int& ret = dp[y][x];
         if(ret == -1) {
-            ret = map[y][x] + max(recursive(y + 1, x), max(recursive(y, x + 1), recursive(y + 1, x + 1)));
+            ret = board[y][x] + max(recursive(y + 1, x), max(recursive(y, x + 1), recursive(y + 1, x + 1)));
         }
         return ret;
     }
@@ -27,7 +27,7 @@ int main() {
 
     for(int i=0; i < N; i++) {
         for(int j=0; j < M; j++) {
-            cin >> map[i][j];
+            cin >> board[i][j];
         }
     }
 

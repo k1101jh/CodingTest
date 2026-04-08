@@ -42,18 +42,18 @@ int main() {
     cin >> n >> m;
     int dest_y, dest_x;
 
-    vector<vector<int>> map(n, vector<int>(m, 0));
+    vector<vector<int>> board(n, vector<int>(m, 0));
     vector<vector<int>> dists(n, vector<int>(m, -1));
 
     // 입력
     for(int i=0; i < n; i++) {
         for(int j=0; j < m; j++) {
-            cin >> map[i][j];
-            if(map[i][j] == 2) {
+            cin >> board[i][j];
+            if(board[i][j] == 2) {
                 dest_y = i;
                 dest_x = j;
                 dists[i][j] = 0;
-            } else if(map[i][j] == 0) {
+            } else if(board[i][j] == 0) {
                 dists[i][j] = 0;
             }
         }
